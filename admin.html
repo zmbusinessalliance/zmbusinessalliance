@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZM Business Alliance | Admin Panel</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#070707;color:#f5f5f5;font-family:Inter,Arial,sans-serif}button,input,textarea{font:inherit}
+.wrap{width:min(1150px,94%);margin:auto}.top{padding:22px 0;border-bottom:1px solid #3b2a0c;display:flex;justify-content:space-between;align-items:center}.logo{color:#f5c451;font-size:22px;font-weight:800}.muted{color:#a8a39a}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}.panel{background:#0e0e0e;border:1px solid #49350f;border-radius:16px;padding:22px}.panel h2{margin-top:0;color:#f5c451}label{display:block;color:#cfc9be;font-size:13px;margin:13px 0 6px}input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #44330f;background:#050505;color:#fff;outline:none}textarea{min-height:120px;resize:vertical}.btn{border:0;border-radius:10px;padding:12px 17px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#ffe08a,#d99a27);color:#16100a}.btn.alt{background:#191611;color:#f5c451;border:1px solid #49350f}.row{display:flex;gap:10px;flex-wrap:wrap}.hide{display:none}.msg{padding:12px;border-radius:10px;margin:15px 0;background:#111;border:1px solid #49350f}.item{border-top:1px solid #28210f;padding:14px 0}.item:first-child{border-top:0}.danger{color:#ff9c9c}.small{font-size:12px;color:#8e887f}.full{grid-column:1/-1}@media(max-width:750px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head>
+<body><div class="wrap">
+<div class="top"><div><div class="logo">ZM BUSINESS ALLIANCE</div><div class="muted">Secure website control panel</div></div><a class="btn alt" href="/">View Website</a></div>
+<div id="login" class="panel" style="max-width:520px;margin:50px auto"><h2>Admin Login</h2><label>Admin Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row" style="margin-top:15px"><button class="btn" onclick="login()">LOGIN</button></div><div id="loginMsg" class="msg hide"></div></div>
+<div id="app" class="hide">
+<div id="msg" class="msg hide"></div>
+<div class="grid">
+<section class="panel"><h2>Site Information</h2>
+<label>Company Name</label><input id="companyName">
+<label>Hero Heading</label><input id="heroHeading">
+<label>Hero Description</label><textarea id="heroDescription"></textarea>
+<label>WhatsApp / Phone</label><input id="phone">
+<label>Email</label><input id="email">
+<label>Instagram Handle</label><input id="instagram">
+<label>Countries Stat</label><input id="countries">
+<label>Partners Stat</label><input id="partners">
+<button class="btn" onclick="saveSettings()">SAVE SETTINGS</button></section>
+
+<section class="panel"><h2>Services</h2><div id="services"></div><div class="row"><button class="btn alt" onclick="addService()">+ Add Service</button><button class="btn" onclick="saveServices()">SAVE SERVICES</button></div></section>
+
+<section class="panel"><h2>Jobs / Opportunities</h2><div id="jobs"></div><div class="row"><button class="btn alt" onclick="addJob()">+ Add Job</button><button class="btn" onclick="saveJobs()">SAVE JOBS</button></div></section>
+
+<section class="panel"><h2>Posts / Insights</h2><div id="posts"></div><div class="row"><button class="btn alt" onclick="addPost()">+ Add Post</button><button class="btn" onclick="savePosts()">SAVE POSTS</button></div></section>
+
+<section class="panel full"><h2>Photo / Poster Manager</h2>
+<p class="muted">The supplied posters are already included in <code>assets/</code>. You can add image URLs here for future posts. For persistent new-file uploads, deploy this package and use the Netlify-hosted storage/upload endpoint included in the API.</p>
+<div id="images"></div>
+<div class="row"><button class="btn alt" onclick="addImage()">+ Add Image</button><button class="btn" onclick="saveImages()">SAVE IMAGE LIST</button></div></section>
+
+<section class="panel full"><h2>Security</h2><p class="muted">Set <b>ADMIN_PASSWORD</b> and <b>ADMIN_SESSION_SECRET</b> in Netlify environment variables. The panel does not hard-code your password.</p><button class="btn alt" onclick="logout()">LOGOUT</button></section>
+</div></div></div>
+<script>
+let token='', state={services:[],jobs:[],posts:[],images:[]};
+const $=id=>document.getElementById(id);
+function msg(t,err=false){$('msg').textContent=t;$('msg').classList.remove('hide');$('msg').style.borderColor=err?'#6b2525':'#49350f'}
+function login(){fetch('/.netlify/functions/admin-api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',password:$('pw').value})}).then(r=>r.json()).then(x=>{if(x.ok){token=x.token;$('login').classList.add('hide');$('app').classList.remove('hide');load()}else{$('loginMsg').textContent=x.error||'Login failed';$('loginMsg').classList.remove('hide')}})}
+async function api(action,data={}){let r=await fetch('/.netlify/functions/admin-api',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({action,...data})});let x=await r.json();if(!x.ok)throw new Error(x.error||'Request failed');return x}
+async function load(){try{let x=await api('get');let s=x.data;$('companyName').value=s.companyName||'';$('heroHeading').value=s.heroHeading||'';$('heroDescription').value=s.heroDescription||'';$('phone').value=s.phone||'';$('email').value=s.email||'';$('instagram').value=s.instagram||'';$('countries').value=s.countries||'';$('partners').value=s.partners||'';state.services=s.services||[];state.jobs=s.jobs||[];state.posts=s.posts||[];state.images=s.images||[];render()}catch(e){msg(e.message,true)}}
+function render(){renderList('services',state.services,(v,i)=>`<div class="item"><label>Service ${i+1} Title</label><input data-k="title" data-i="${i}" value="${esc(v.title||'')}"><label>Description</label><textarea data-k="description" data-i="${i}">${esc(v.description||'')}</textarea><button class="btn alt" onclick="state.services.splice(${i},1);render()">Delete</button></div>`);
+renderList('jobs',state.jobs,(v,i)=>`<div class="item"><label>Job ${i+1} Title</label><input data-k="title" data-i="${i}" value="${esc(v.title||'')}"><label>Description</label><textarea data-k="description" data-i="${i}">${esc(v.description||'')}</textarea><button class="btn alt" onclick="state.jobs.splice(${i},1);render()">Delete</button></div>`);
+renderList('posts',state.posts,(v,i)=>`<div class="item"><label>Post Title</label><input data-k="title" data-i="${i}" value="${esc(v.title||'')}"><label>Content</label><textarea data-k="content" data-i="${i}">${esc(v.content||'')}</textarea><button class="btn alt" onclick="state.posts.splice(${i},1);render()">Delete</button></div>`);
+renderList('images',state.images,(v,i)=>`<div class="item"><label>Image URL / Path</label><input data-k="url" data-i="${i}" value="${esc(v.url||'')}"><label>Caption</label><input data-k="caption" data-i="${i}" value="${esc(v.caption||'')}"><button class="btn alt" onclick="state.images.splice(${i},1);render()">Delete</button></div>`)}
+function renderList(id,arr,fn){$(id).innerHTML=arr.map(fn).join('')||'<div class="muted">No items yet.</div>'}
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function collect(id,arr){document.querySelectorAll('#'+id+' [data-k]').forEach(el=>{let i=+el.dataset.i;arr[i][el.dataset.k]=el.value})}
+function addService(){state.services.push({title:'New Service',description:'Add service description.'});render()}
+function addJob(){state.jobs.push({title:'New Opportunity',description:'Add opportunity details.'});render()}
+function addPost(){state.posts.push({title:'New Post',content:'Add post content.'});render()}
+function addImage(){state.images.push({url:'assets/',caption:'New poster'});render()}
+async function saveSettings(){try{await api('save',{data:{companyName:$('companyName').value,heroHeading:$('heroHeading').value,heroDescription:$('heroDescription').value,phone:$('phone').value,email:$('email').value,instagram:$('instagram').value,countries:$('countries').value,partners:$('partners').value}});msg('Settings saved.')}catch(e){msg(e.message,true)}}
+async function saveServices(){collect('services',state.services);try{await api('save',{data:{services:state.services}});msg('Services saved.')}catch(e){msg(e.message,true)}}
+async function saveJobs(){collect('jobs',state.jobs);try{await api('save',{data:{jobs:state.jobs}});msg('Jobs saved.')}catch(e){msg(e.message,true)}}
+async function savePosts(){collect('posts',state.posts);try{await api('save',{data:{posts:state.posts}});msg('Posts saved.')}catch(e){msg(e.message,true)}}
+async function saveImages(){collect('images',state.images);try{await api('save',{data:{images:state.images}});msg('Image list saved.')}catch(e){msg(e.message,true)}}
+function logout(){token='';location.reload()}
+</script></body></html>

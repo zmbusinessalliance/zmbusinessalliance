@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZM Business Alliance | Global Business Network</title>
+<meta name="description" content="ZM Business Alliance connects businesses, professionals and opportunities across India, UAE and global markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--panel:#0c0c0c;--gold:#f5c451;--gold2:#b77b18;--white:#f7f7f7;--muted:#bcb8af;--line:rgba(245,196,81,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 75% 25%,#17130a 0,#050505 42%,#000 100%);color:var(--white);font-family:Inter,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(3,3,3,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{min-height:86px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:14px;margin-right:auto}.brand img{width:58px;height:58px;object-fit:contain}.brand span{font-family:"Playfair Display",serif;font-weight:800;font-size:24px;color:var(--gold);letter-spacing:.3px}
+nav{display:flex;gap:26px;align-items:center}nav a{font-weight:600;color:#eae7df;font-size:14px}nav a:hover{color:var(--gold)}.cta{padding:14px 22px;border-radius:12px;background:linear-gradient(135deg,#ffe08a,#d99a27);color:#16100a!important;font-weight:800;box-shadow:0 8px 30px rgba(245,196,81,.22)}
+.menu{display:none;border:1px solid var(--line);background:#0b0b0b;color:#fff;border-radius:10px;padding:9px 12px}
+.hero{min-height:730px;display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:center;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(115deg,transparent 30%,rgba(245,196,81,.08) 30.2%,transparent 30.5%),radial-gradient(circle at 90% 50%,rgba(245,196,81,.13),transparent 30%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid #cda33f;background:linear-gradient(90deg,#f8d879,#e8b84a);color:#15120b;border-radius:16px;padding:10px 16px;font-size:14px;font-weight:800}
+h1{font-family:"Playfair Display",serif;font-size:clamp(48px,6vw,82px);line-height:.96;margin:28px 0 20px;letter-spacing:-2px}h1 .gold{color:var(--gold)}.lead{font-size:17px;line-height:1.75;color:#dedbd3;max-width:690px}
+.actions{display:flex;gap:16px;margin:30px 0}.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 24px;border-radius:13px;border:1px solid #8c6926;font-weight:800}.btn.primary{background:linear-gradient(135deg,#ffe18c,#d79520);color:#120d05}.btn.secondary{background:rgba(0,0,0,.35)}
+.stats{display:flex;gap:38px;margin-top:36px;flex-wrap:wrap}.stat strong{display:block;color:var(--gold);font-size:22px}.stat span{color:#aaa49a;font-size:12px}
+.hero-logo{display:flex;justify-content:center;align-items:center}.hero-logo img{width:min(560px,100%);filter:drop-shadow(0 0 28px rgba(245,196,81,.22));animation:float 6s ease-in-out infinite}@keyframes float{50%{transform:translateY(-10px)}}
+.section{padding:92px 0}.section.dark{background:linear-gradient(180deg,#080808,#0c0a07,#080808);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.eyebrow{color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:12px}.title{font-family:"Playfair Display",serif;font-size:46px;margin:12px 0 18px}.sub{color:#bcb8af;line-height:1.7;max-width:760px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}.card{background:linear-gradient(145deg,#12110f,#090909);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:inset 0 1px rgba(255,255,255,.04),0 18px 50px rgba(0,0,0,.25)}.card h3{margin:0 0 10px;color:var(--gold);font-size:19px}.card p{margin:0;color:#bdb9b0;line-height:1.65;font-size:14px}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}.poster{overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#080808}.poster img{width:100%;display:block}.poster figcaption{padding:14px 18px;color:var(--gold);font-weight:800}
+.services{grid-template-columns:repeat(3,1fr)}.service{min-height:180px}
+.job{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}.job ul{padding-left:20px;color:#c6c1b8;line-height:1.9}.applybox{border:1px solid var(--line);border-radius:20px;padding:28px;background:linear-gradient(145deg,#151109,#090909)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}.contact-card{display:flex;gap:18px;align-items:flex-start}.icon{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;color:var(--gold);font-size:21px;flex:none}
+footer{padding:38px 0;border-top:1px solid var(--line);background:#030303;color:#9d988e}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.gold{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(18px);transition:.7s}.reveal.show{opacity:1;transform:none}
+@media(max-width:900px){nav{display:none}.menu{display:block}.nav.open nav{display:flex;position:absolute;left:4%;right:4%;top:78px;background:#090909;border:1px solid var(--line);padding:18px;border-radius:16px;flex-direction:column;align-items:stretch}.hero{grid-template-columns:1fr;padding:60px 0 40px}.hero-logo{order:-1}.grid3,.services{grid-template-columns:1fr 1fr}.contact{grid-template-columns:1fr}}
+@media(max-width:600px){.brand span{font-size:17px}.brand img{width:48px;height:48px}.title{font-size:36px}.grid3,.services,.poster-grid{grid-template-columns:1fr}.hero{min-height:auto}h1{font-size:48px}.actions{flex-direction:column}.btn{justify-content:center}.stats{gap:20px}.job{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="container nav" id="nav">
+<a class="brand" href="#home"><img src="assets/zm-logo.png" alt="ZM Business Alliance logo"><span>ZM BUSINESS ALLIANCE</span></a>
+<nav>
+<a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#partnerships">Partnerships</a><a href="#insights">Insights</a><a href="#contact">Contact</a><a class="cta" href="#apply">APPLY NOW</a>
+</nav><button class="menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+</div></header>
+
+<main id="home">
+<section class="container hero">
+<div class="reveal">
+<div class="badge">◉ &nbsp; INDIAN COMPANY BASED IN UAE</div>
+<h1><span class="gold">YOUR BUSINESS,</span><br>OUR NETWORK,<br><span class="gold">GLOBAL IMPACT.</span></h1>
+<p class="lead">Connecting businesses across India, UAE, and 40+ countries worldwide. Partner with ZM Business Alliance to grow your presence, build strategic alliances, and succeed in global markets.</p>
+<div class="actions"><a class="btn primary" href="#apply">APPLY NOW →</a><a class="btn secondary" href="#about">LEARN MORE</a></div>
+<div class="stats"><div class="stat"><strong>40+</strong><span>Countries</span></div><div class="stat"><strong>500+</strong><span>Partners</span></div><div class="stat"><strong>Global</strong><span>Reach</span></div></div>
+</div>
+<div class="hero-logo reveal"><img src="assets/zm-logo.png" alt="ZM Business Alliance"></div>
+</section>
+
+<section class="section dark" id="about"><div class="container reveal">
+<div class="eyebrow">Who We Are</div><div class="title">Connecting Businesses. Creating Opportunities.</div>
+<p class="sub">ZM Business Alliance is an Indian company based in UAE, committed to building bridges between businesses and skilled professionals. We provide smart solutions, reliable support and opportunities to help businesses grow and people build their future.</p>
+<div class="grid3"><div class="card"><h3>TRUST</h3><p>Building strong relationships with honesty and transparency.</p></div><div class="card"><h3>COMMITMENT</h3><p>Dedicated to delivering practical, dependable solutions.</p></div><div class="card"><h3>GROWTH</h3><p>Creating value and opportunities for businesses and professionals.</p></div></div>
+</div></section>
+
+<section class="section" id="services"><div class="container reveal">
+<div class="eyebrow">What We Do</div><div class="title">Our Services</div><p class="sub">Complete solutions for businesses and professionals, delivered with a global mindset.</p>
+<div class="grid3 services">
+<div class="card service"><h3>Recruitment Solutions</h3><p>Connecting the right talent with the right opportunities — permanent, temporary and contract staffing.</p></div>
+<div class="card service"><h3>Manpower Supply</h3><p>Skilled, semi-skilled and unskilled manpower for varied industries and business needs.</p></div>
+<div class="card service"><h3>Digital Solutions</h3><p>Website development, branding, social media marketing, SEO and complete digital growth solutions.</p></div>
+<div class="card service"><h3>Business Consultancy</h3><p>Strategy, planning, setup, operations and process improvement support.</p></div>
+<div class="card service"><h3>Documentation Services</h3><p>PRO services, visa processing, company setup support, typing, attestation and document clearing.</p></div>
+<div class="card service"><h3>Branding & Marketing</h3><p>Creative design, marketing campaigns and digital promotion to build stronger brands.</p></div>
+</div></div></section>
+
+<section class="section dark" id="partnerships"><div class="container reveal">
+<div class="eyebrow">Work With Us</div><div class="title">Your Talent. Our Platform.</div><p class="sub">Job seekers, skilled professionals, business partners, freelancers and agencies can become part of our growing network.</p>
+<div class="grid3"><div class="card"><h3>JOB SEEKERS</h3><p>Find the right opportunities and build your career.</p></div><div class="card"><h3>SKILLED PROFESSIONALS</h3><p>Join our network and grow your professional journey.</p></div><div class="card"><h3>BUSINESS PARTNERS</h3><p>Collaborate with us and expand your business.</p></div><div class="card"><h3>FREELANCERS & AGENCIES</h3><p>Be part of our alliance and work on great projects.</p></div><div class="card"><h3>STRONG NETWORK</h3><p>Connect with professionals, businesses and opportunities.</p></div><div class="card"><h3>SUPPORT & GUIDANCE</h3><p>We support you at every step of your journey.</p></div></div>
+</div></section>
+
+<section class="section" id="insights"><div class="container reveal">
+<div class="eyebrow">Our Visual Portfolio</div><div class="title">ZM Business Alliance</div><p class="sub">The supplied brand posters are included in this website package and presented as visual content.</p>
+<div class="poster-grid">
+<figure class="poster"><img src="assets/who-we-are.png" alt="Who We Are poster"><figcaption>Who We Are</figcaption></figure>
+<figure class="poster"><img src="assets/work-with-us.png" alt="Work With Us poster"><figcaption>Work With Us</figcaption></figure>
+<figure class="poster"><img src="assets/our-services.png" alt="Our Services poster"><figcaption>Our Services</figcaption></figure>
+<figure class="poster"><img src="assets/job-vacancy.png" alt="Job Vacancy poster"><figcaption>Job Vacancy</figcaption></figure>
+</div></div></section>
+
+<section class="section dark" id="apply"><div class="container reveal">
+<div class="eyebrow">Career & Business Opportunities</div><div class="title">Build Your Career With Us</div>
+<div class="job"><div><p class="sub">Opportunities shown in the supplied hiring material include Housemaid, Home Nurse and Male/Female Nurse. Benefits highlighted include attractive opportunities, accommodation, medical insurance and annual leave.</p><ul><li>All-country opportunities</li><li>CV/profile and business details welcome</li><li>Connect → Explore → Grow Together</li></ul></div><div class="applybox"><h3 class="gold">APPLY TODAY</h3><p>Send your details through the application form or contact the team directly.</p><a class="btn primary" href="#contact">START APPLICATION</a></div></div>
+</div></section>
+
+<section class="section" id="contact"><div class="container reveal"><div class="eyebrow">Get In Touch</div><div class="title">Let's Grow Together</div>
+<div class="contact">
+<div class="card contact-card"><div class="icon">☎</div><div><h3>CALL / WHATSAPP</h3><p><a href="https://wa.me/918398802971">+91 8398802971</a></p></div></div>
+<div class="card contact-card"><div class="icon">✉</div><div><h3>EMAIL</h3><p><a href="mailto:zmbusinessalliance@gmail.com">zmbusinessalliance@gmail.com</a></p></div></div>
+<div class="card contact-card"><div class="icon">◎</div><div><h3>INSTAGRAM</h3><p><a href="https://instagram.com/zmbusinessalliance">@zmbusinessalliance</a></p></div></div>
+<div class="card contact-card"><div class="icon">⌂</div><div><h3>GLOBAL REACH</h3><p>Serving businesses and professionals across countries worldwide.</p></div></div>
+</div></div></section>
+</main>
+<footer><div class="container footer-row"><div>© <span id="year"></span> <span class="gold">ZM Business Alliance</span>. All rights reserved.</div><a href="/admin.html">Admin</a></div></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('show')),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+</script>
+</body></html>
